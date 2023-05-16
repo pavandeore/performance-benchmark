@@ -1,3 +1,3 @@
 # performance-benchmark
 
-URL - [pavandeore.github.io/benchmark-performance](https://pavandeore.github.io/benchmark-performance)
+URL - [pavandeore.github.io/performance-benchmark](https://pavandeore.github.io/performance-benchmark)
