@@ -16,7 +16,7 @@
             <h2>Table of Contents</h2>
             <ol>
                 <li>Install RUST on Ubuntu</li>
-                <li>Install SALVO on Ubuntu</li>
+                <li>Setup SALVO in your RUST project</li>
                 <li>Setup Basic server to listen to GET request</li>
                 <li>Create simple read operation route from MySQL</li>
                 <li>Create write operation route</li>
@@ -44,10 +44,47 @@
 
         <section>
             <h2>
-                Install SALVO on Ubuntu
+                Setup SALVO in your RUST project
             </h2>
             <article>
-                
+                <p>Create a new RUST project using command</p>
+                <code>cargo new hello_salvo --bin</code>
+                <p>Open hello_salvo folder in your editor VSCODE or sublime. you should be able to see cargo.toml and main.rs file. Add below code in cargo.toml</p>
+<code>
+<pre>
+[dependencies]
+salvo = "*"
+tokio = { version = "1", features = ["macros"] }
+</pre>
+</code>
+            </article>
+        </section>
+
+        <section>
+            <h2>
+                Setup Basic server to listen to GET request
+            </h2>
+            <article>
+                <p>in main.rs file paste below code</p>
+<code>
+<pre>
+use salvo::prelude::*;
+
+#[handler]
+async fn hello() -> &'static str {
+    "Hello World"
+}
+
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt().init();
+
+    let router = Router::new().get(hello);
+    let acceptor = TcpListener::new("127.0.0.1:5800").bind().await;
+    Server::new(acceptor).serve(router).await;
+}    
+</pre>
+</code>
             </article>
         </section>
 
